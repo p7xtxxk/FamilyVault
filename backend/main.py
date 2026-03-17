@@ -5,17 +5,20 @@ from fastapi.middleware.cors import CORSMiddleware #cross origin resouse sharing
 from fastapi.responses import FileResponse,JSONResponse
 from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
+from fastapi.staticfiles import StaticFiles
 load_dotenv
 
 #calling auth and docs
 from backend.routes.auth_routes import router as auth_router
 from backend.routes.document_routes import router as doc_router
 
+
 app=FastAPI(
     title="GUPTA VAULT",
     description="DOCUMENT STORAGE",
     version="1.0.0",
 )
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
 # setting up CORS to help accept all origin  requests
 app.add_middleware(
