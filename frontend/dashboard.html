@@ -180,6 +180,7 @@
   }
   .filter-chip:hover { background: var(--text); color: var(--bg); }
   .filter-chip.active { background: var(--text); color: var(--yellow); box-shadow: var(--shadow-sm); }
+  [data-theme="dark"] .filter-chip.active { background: var(--yellow); color: #0a0a0a; }
 
   /* DOC GRID */
   .doc-grid {
@@ -457,14 +458,14 @@
 
   <div class="filter-bar" id="filterBar">
     <button class="filter-chip active" onclick="filterDocs('All', this)">All</button>
-    <button class="filter-chip" onclick="filterDocs('Property', this)">🏠 Property</button>
-    <button class="filter-chip" onclick="filterDocs('Insurance', this)">🛡️ Insurance</button>
-    <button class="filter-chip" onclick="filterDocs('Passport', this)">🛂 Passport</button>
-    <button class="filter-chip" onclick="filterDocs('Identity', this)">🪪 Identity</button>
-    <button class="filter-chip" onclick="filterDocs('Medical', this)">⚕️ Medical</button>
-    <button class="filter-chip" onclick="filterDocs('Financial', this)">💼 Financial</button>
-    <button class="filter-chip" onclick="filterDocs('Legal', this)">⚖️ Legal</button>
-    <button class="filter-chip" onclick="filterDocs('Vehicle', this)">🚗 Vehicle</button>
+    <button class="filter-chip" onclick="filterDocs('Property', this)">Property</button>
+    <button class="filter-chip" onclick="filterDocs('Insurance', this)">Insurance</button>
+    <button class="filter-chip" onclick="filterDocs('Passport', this)">Passport</button>
+    <button class="filter-chip" onclick="filterDocs('Identity', this)">Identity</button>
+    <button class="filter-chip" onclick="filterDocs('Medical', this)">Medical</button>
+    <button class="filter-chip" onclick="filterDocs('Financial', this)">Financial</button>
+    <button class="filter-chip" onclick="filterDocs('Legal', this)">Legal</button>
+    <button class="filter-chip" onclick="filterDocs('Vehicle', this)">Vehicle</button>
   </div>
 
   <div class="doc-grid" id="docGrid">
@@ -497,9 +498,9 @@
 
 <script>
 const DOC_TYPE_ICONS = {
-  'Property':'🏠','Insurance':'🛡️','Passport':'🛂',
-  'Identity':'🪪','Medical':'⚕️','Financial':'💼',
-  'Legal':'⚖️','Vehicle':'🚗','Other':'📄',
+  'Property':'','Insurance':'','Passport':'',
+  'Identity':'','Medical':'','Financial':'',
+  'Legal':'','Vehicle':'','Other':'',
 };
 
 let isAdmin = false;
@@ -559,8 +560,8 @@ function renderDocuments(docs) {
   }
 
   grid.innerHTML = filtered.map((doc, i) => {
-    const icon = DOC_TYPE_ICONS[doc.document_type] || '📄';
-    const deleteBtn = isAdmin ? `<button class="btn-doc danger" data-title="${escapeHtml(doc.title)}" onclick="openDeleteModal('${doc.id}', this, this.dataset.title)">🗑️ DEL</button>` : '';
+    const icon = DOC_TYPE_ICONS[doc.document_type] || '';
+    const deleteBtn = isAdmin ? `<button class="btn-doc danger" data-title="${escapeHtml(doc.title)}" onclick="openDeleteModal('${doc.id}', this, this.dataset.title)">DELETE</button>` : '';
     return `
       <div class="doc-card" data-type="${escapeHtml(doc.document_type)}" style="animation-delay:${i*0.06}s">
         <div class="doc-card-top">
@@ -571,8 +572,8 @@ function renderDocuments(docs) {
           <div class="doc-title">${escapeHtml(doc.title)}</div>
           <div class="doc-date">// ADDED ${formatDate(doc.uploaded_at)}</div>
           <div class="doc-actions">
-            <a class="btn-doc primary" href="/api/get_document/${doc.id}" target="_blank">📖 VIEW</a>
-            <a class="btn-doc" href="/api/get_document/${doc.id}" download>⬇ SAVE</a>
+            <a class="btn-doc primary" href="/api/get_document/${doc.id}" target="_blank">VIEW</a>
+            <a class="btn-doc" href="/api/get_document/${doc.id}" download>SAVE</a>
             ${deleteBtn}
           </div>
         </div>
