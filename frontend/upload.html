@@ -375,7 +375,7 @@
       </div>
 
       <button class="btn-upload" id="uploadBtn" onclick="uploadDocument()">
-        🔒 ENCRYPT & UPLOAD
+        ENCRYPT & UPLOAD
       </button>
       <div class="progress-wrap" id="progressWrap">
         <div class="progress-fill" id="progressFill"></div>
@@ -446,7 +446,7 @@ async function uploadDocument() {
     const d = await r.json();
     if (!r.ok) throw new Error(d.detail || 'Upload failed');
     pf.style.width = '100%';
-    showMsg('✅ ' + d.message, 'success');
+    showMsg('Upload complete: ' + d.message, 'success');
     document.getElementById('titleInput').value = '';
     document.getElementById('typeInput').value = '';
     document.getElementById('fileInput').value = '';
@@ -454,7 +454,7 @@ async function uploadDocument() {
     loadDocCount();
   } catch(e) { showMsg(e.message); pf.style.width = '0'; }
   finally {
-    btn.disabled = false; btn.innerHTML = '🔒 ENCRYPT & UPLOAD';
+    btn.disabled = false; btn.innerHTML = 'ENCRYPT & UPLOAD';
     setTimeout(() => pw.classList.remove('show'), 2200);
   }
 }
